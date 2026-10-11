@@ -1,5 +1,7 @@
 ---
-import '../styles/global.css';
+import "../styles/global.css";
+import SiteHeader from "../components/layout/SiteHeader.astro";
+import SiteFooter from "../components/layout/SiteFooter.astro";
 
 interface Props {
   title?: string;
@@ -7,13 +9,13 @@ interface Props {
 }
 
 const {
-  title = 'Portafolio de desarrollador',
-  description = 'Portafolio profesional de desarrollo de software.',
+  title = "Developer Portfolio",
+  description = "Portfolio of a software developer.",
 } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -22,8 +24,15 @@ const {
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
   </head>
-  <body>
-    <a class="skip-link" href="#main-content">Saltar al contenido</a>
-    <slot />
+
+  <body id="top">
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <SiteHeader />
+
+    <main id="main-content">
+      <slot />
+    </main>
+
+    <SiteFooter />
   </body>
 </html>
