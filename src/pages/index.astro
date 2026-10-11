@@ -1,12 +1,19 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<BaseLayout>
-  <main id="main-content">
-    <section aria-labelledby="intro-title">
-      <h1 id="intro-title">Portafolio en construcción</h1>
-      <p>Este es el punto de partida. Añadir aquí  presentación y  proyectos.</p>
-    </section>
-  </main>
+<BaseLayout
+  title="Developer Portfolio"
+  description="Portfolio of a software developer."
+>
+  <section class="container placeholder" aria-labelledby="intro-title">
+    <h1 id="intro-title">Portfolio in progress</h1>
+    <p>Your introduction and selected projects will appear here.</p>
+  </section>
 </BaseLayout>
+
+<style>
+  .placeholder {
+    padding-block: var(--space-8);
+  }
+</style>
