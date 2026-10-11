@@ -1,43 +1,40 @@
-# Astro Starter Kit: Minimal
+# Portafolio de desarrollador
 
-```sh
-npm create astro@latest -- --template minimal
+Base de un portafolio personal construido con Astro y TypeScript.
+
+## Requisitos
+
+Node.js `>=22.12.0` (ver `engines` en `package.json`).
+
+## Empezar
+
+```bash
+npm install
+npm run dev
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+El servidor local estará en http://localhost:4321.
 
-## 🚀 Project Structure
+## Comandos
 
-Inside of your Astro project, you'll see the following folders and files:
+- `npm run dev`: servidor de desarrollo.
+- `npm run build`: genera el sitio estático en `dist/`.
+- `npm run preview`: previsualiza la compilación.
+
+## Estructura
 
 ```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+public/                 Archivos estáticos servidos sin transformación.
+src/
+├── assets/              Imágenes y recursos importados desde el código.
+├── components/          Componentes Astro reutilizables.
+├── content/projects/    Contenido de proyectos (preparado para organizarlo).
+├── data/                Datos del sitio y configuración editable.
+├── layouts/             Estructuras compartidas de página.
+├── pages/               Rutas; cada archivo define una URL.
+└── styles/              Estilos globales y tokens de diseño.
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+Mantener las páginas enfocadas en componer componentes y dejar los estilos compartidos en `src/styles/`. Usar `public/` para archivos con ruta fija (por ejemplo, `favicon.svg`) y `src/assets/` para imágenes que se quiera importar y optimizar desde Astro.
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
 
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
