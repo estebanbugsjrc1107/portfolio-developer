@@ -40,6 +40,10 @@ export const hero = {
 } as const;
 
 export const socialLinks = [
-  { label: 'GitHub', href: 'https://github.com/estebanbugsjrc1107' },
-  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/estebanjrc1107/' },
+  { label: 'GitHub', icon: 'github', href: 'https://github.com/estebanbugsjrc1107' },
+  { label: 'LinkedIn', icon: 'linkedin', href: 'https://www.linkedin.com/in/estebanjrc1107/' },
+  { label: 'Instagram', icon: 'instagram', href: 'https://www.instagram.com/esteban_jrc1107/' },
+  { label: 'Facebook', icon: 'facebook', href: 'https://www.facebook.com/estebanjrc1107' },
+  { label: 'TikTok', icon: 'tiktok', href: 'https://www.tiktok.com/@esteban_jrc1107' },
+  { label: 'YouTube', icon: 'youtube', href: 'https://www.youtube.com/@estebanjrc1107' },
 ] as const;
