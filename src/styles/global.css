@@ -72,6 +72,23 @@ body {
   padding-inline: var(--page-gutter);
 }
 
+.site-brand {
+  color: var(--color-text);
+  font-size: 1.125rem;
+  font-weight: 800;
+  letter-spacing: -0.07em;
+  text-decoration: none;
+}
+
+.site-brand__initial,
+.site-brand__domain {
+  color: var(--color-accent);
+}
+
+.site-footer .site-brand {
+  color: var(--color-footer-text, #f4f1ea);
+}
+
 h1,
 h2,
 h3,
