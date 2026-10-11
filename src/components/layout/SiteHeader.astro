@@ -3,65 +3,85 @@ import { navigation, site } from "../../data/site";
 ---
 
 <header class="site-header">
-    <div class="container site-header__inner">
-        <a class="site-brand" href="/" aria-label={`${site.name} home`}>
-            {site.name}
-        </a>
+  <div class="container site-header__inner">
+    <a class="site-brand" href="/" aria-label={`${site.name} home`}>
+      <span class="site-brand__initial">{site.brand.initial}</span>{site.brand.name}<span class="site-brand__domain">{site.brand.domain}</span>
+    </a>
 
-        <nav class="site-nav" aria-label="Main navigation">
-            {
-                navigation.map((item) => (
-                    <a class="site-nav__link" href={item.href}>
-                        {item.label}
-                    </a>
-                ))
-            }
-        </nav>
-    </div>
+    <nav class="site-nav" aria-label="Main navigation">
+      {navigation.map((item) => (
+        <a class="site-nav__link" href={item.href}>{item.label}</a>
+      ))}
+    </nav>
+  </div>
 </header>
 
 <style>
-    .site-header {
-        border-bottom: 1px solid var(--color-border);
-    }
+  .site-header {
+    position: relative;
+    z-index: 5;
+  }
 
+  .site-header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    padding-block: 1.75rem;
+  }
+
+  .site-brand {
+    color: var(--color-text);
+    font-size: 1.125rem;
+    font-weight: 800;
+    letter-spacing: -0.07em;
+    text-decoration: none;
+  }
+
+  .site-brand__initial,
+  .site-brand__domain {
+    color: var(--color-accent);
+  }
+
+  .site-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-left: auto;
+  }
+
+  .site-nav__link {
+    color: var(--color-muted);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    transition: color 180ms ease;
+  }
+
+  .site-nav__link:hover {
+    color: var(--color-text);
+  }
+
+  @media (max-width: 50rem) {
     .site-header__inner {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: var(--space-5);
-        padding-block: var(--space-5);
-    }
-
-    .site-brand {
-        color: var(--color-text);
-        font-weight: 700;
-        text-decoration: none;
+      padding-block: 1.4375rem;
     }
 
     .site-nav {
-        display: flex;
-        flex-wrap: wrap;
-        gap: var(--space-5);
+      gap: 1.25rem;
+    }
+  }
+
+  @media (max-width: 32rem) {
+    .site-header__inner {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 1rem;
     }
 
-    .site-nav__link {
-        color: var(--color-muted);
-        text-decoration: none;
+    .site-nav {
+      gap: 1.125rem;
     }
-
-    .site-nav__link:hover {
-        color: var(--color-accent);
-    }
-
-    @media (max-width: 40rem) {
-        .site-header__inner {
-            align-items: flex-start;
-            flex-direction: column;
-        }
-
-        .site-nav {
-            gap: var(--space-4);
-        }
-    }
+  }
 </style>

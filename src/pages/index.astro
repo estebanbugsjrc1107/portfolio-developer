@@ -1,19 +1,9 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/sections/Hero.astro";
+import { site } from "../data/site";
 ---
 
-<BaseLayout
-  title="Developer Portfolio"
-  description="Portfolio of a software developer."
->
-  <section class="container placeholder" aria-labelledby="intro-title">
-    <h1 id="intro-title">Portfolio in progress</h1>
-    <p>Your introduction and selected projects will appear here.</p>
-  </section>
+<BaseLayout title={`${site.name} — ${site.role}`} description={site.description}>
+  <Hero />
 </BaseLayout>
-
-<style>
-  .placeholder {
-    padding-block: var(--space-8);
-  }
-</style>
