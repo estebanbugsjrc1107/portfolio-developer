@@ -1,0 +1,136 @@
+---
+import { skillGroups } from "../../data/skills";
+---
+
+<div class="skills" aria-labelledby="skills-title">
+  <h3 class="skills__title" id="skills-title">Skills &amp; Technologies</h3>
+
+  <div
+    class="skills__viewport"
+    role="region"
+    aria-label="Technology skills carousel"
+    tabindex="0"
+  >
+    <div class="skills__track">
+      {[0, 1].map((copy) => (
+        <div class="skills__sequence" aria-hidden={copy === 1 ? "true" : undefined}>
+          {skillGroups.map((group) => (
+            <div class="skills__group">
+              <span class="skills__category">{group.category}</span>
+              {group.items.map((skill) => (
+                <span class="skills__item">{skill}</span>
+              ))}
+            </div>
+          ))}
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
+
+<style>
+  .skills {
+    margin-top: 3.5rem;
+  }
+
+  .skills__title {
+    margin: 0 0 1.25rem;
+    color: var(--color-muted);
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .skills__viewport {
+    overflow: hidden;
+    mask-image: linear-gradient(
+      90deg,
+      transparent,
+      #000 2.5rem,
+      #000 calc(100% - 2.5rem),
+      transparent
+    );
+  }
+
+  .skills__track,
+  .skills__sequence {
+    display: flex;
+    width: max-content;
+  }
+
+  .skills__track {
+    animation: skills-marquee 48s linear infinite;
+    will-change: transform;
+  }
+
+  .skills__viewport:hover .skills__track,
+  .skills__viewport:focus-within .skills__track {
+    animation-play-state: paused;
+  }
+
+  .skills__viewport:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 4px;
+  }
+
+  .skills__sequence {
+    align-items: center;
+    gap: 0.625rem;
+    padding-right: 2rem;
+  }
+
+  .skills__group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .skills__category {
+    margin-inline: 0.75rem 0.25rem;
+    color: var(--color-accent);
+    font-family: var(--font-mono);
+    font-size: 0.5625rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .skills__item {
+    display: inline-flex;
+    min-height: 1.875rem;
+    align-items: center;
+    padding: 0.35rem 0.75rem;
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    color: var(--color-text);
+    font-size: 0.6875rem;
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+
+  @keyframes skills-marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .skills__viewport {
+      overflow-x: auto;
+      mask-image: none;
+      scrollbar-width: thin;
+    }
+
+    .skills__track {
+      animation: none;
+      will-change: auto;
+    }
+
+    .skills__sequence[aria-hidden="true"] {
+      display: none;
+    }
+  }
+</style>

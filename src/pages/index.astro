@@ -1,9 +1,11 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Hero from "../components/sections/Hero.astro";
+import About from "../components/sections/About.astro";
 import { site } from "../data/site";
 ---
 
 <BaseLayout title={`${site.name} — ${site.role}`} description={site.description}>
   <Hero />
+  <About />
 </BaseLayout>
