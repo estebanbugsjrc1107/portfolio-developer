@@ -18,6 +18,21 @@ const {
 <!doctype html>
 <html lang={site.locale}>
   <head>
+    <script is:inline>
+      (() => {
+        const storageKey = "portfolio-theme";
+        let theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+
+        try {
+          const savedTheme = window.localStorage.getItem(storageKey);
+          if (savedTheme === "light" || savedTheme === "dark") theme = savedTheme;
+        } catch {
+          // Fall back to the system preference when browser storage is blocked.
+        }
+
+        document.documentElement.dataset.theme = theme;
+      })();
+    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />

@@ -13,8 +13,52 @@ import { navigation, site } from "../../data/site";
         <a class="site-nav__link" href={item.href}>{item.label}</a>
       ))}
     </nav>
+
+    <button
+      class="theme-toggle"
+      type="button"
+      data-theme-toggle
+      aria-label="Switch to dark theme"
+    >
+      <svg class="theme-toggle__moon" aria-hidden="true" viewBox="0 0 24 24" fill="none">
+        <path d="M20.2 15.4A8.7 8.7 0 0 1 8.6 3.8 8.8 8.8 0 1 0 20.2 15.4Z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+      <svg class="theme-toggle__sun" aria-hidden="true" viewBox="0 0 24 24" fill="none">
+        <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.6" />
+        <path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+      </svg>
+    </button>
   </div>
 </header>
+
+<script is:inline>
+  (() => {
+    const storageKey = "portfolio-theme";
+    const toggle = document.querySelector("[data-theme-toggle]");
+
+    const updateButtonLabel = () => {
+      const isDark = document.documentElement.dataset.theme === "dark";
+      toggle?.setAttribute("aria-label", isDark ? "Switch to light theme" : "Switch to dark theme");
+    };
+
+    updateButtonLabel();
+
+    document.addEventListener("click", (event) => {
+      if (!(event.target instanceof Element)) return;
+      if (!event.target.closest("[data-theme-toggle]")) return;
+
+      const nextTheme = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+      document.documentElement.dataset.theme = nextTheme;
+      updateButtonLabel();
+
+      try {
+        window.localStorage.setItem(storageKey, nextTheme);
+      } catch {
+        // Theme changes still work for this page when browser storage is blocked.
+      }
+    });
+  })();
+</script>
 
 <style>
   .site-header {
@@ -50,6 +94,39 @@ import { navigation, site } from "../../data/site";
     color: var(--color-text);
   }
 
+  .theme-toggle {
+    display: grid;
+    width: 2.25rem;
+    height: 2.25rem;
+    flex: 0 0 auto;
+    place-items: center;
+    border: 1px solid var(--color-border);
+    border-radius: 50%;
+    background: transparent;
+    color: var(--color-muted);
+    transition: border-color 180ms ease, color 180ms ease, background-color 180ms ease;
+  }
+
+  .theme-toggle:hover {
+    border-color: var(--color-text);
+    background: var(--color-surface);
+    color: var(--color-text);
+  }
+
+  .theme-toggle svg {
+    width: 1.125rem;
+    height: 1.125rem;
+  }
+
+  .theme-toggle__sun,
+  :global([data-theme="dark"]) .theme-toggle__moon {
+    display: none;
+  }
+
+  :global([data-theme="dark"]) .theme-toggle__sun {
+    display: block;
+  }
+
   @media (max-width: 50rem) {
     .site-header__inner {
       padding-block: 1.4375rem;
@@ -62,13 +139,27 @@ import { navigation, site } from "../../data/site";
 
   @media (max-width: 32rem) {
     .site-header__inner {
-      align-items: flex-start;
-      flex-direction: column;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
       gap: 1rem;
     }
 
     .site-nav {
+      grid-column: 1 / -1;
+      margin-left: 0;
       gap: 1.125rem;
+    }
+
+    .theme-toggle {
+      grid-column: 2;
+      grid-row: 1;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .theme-toggle {
+      transition: none;
     }
   }
 </style>
