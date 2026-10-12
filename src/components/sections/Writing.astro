@@ -1,0 +1,252 @@
+---
+import { writingNotes } from "../../data/writing";
+import NewsletterForm from "../forms/NewsletterForm.astro";
+---
+
+<section class="writing section" id="writing" aria-labelledby="writing-title">
+  <div class="container">
+    <div class="writing__layout">
+      <p class="writing__eyebrow">
+        <span>03</span>
+        <span aria-hidden="true">—</span>
+        <span>Notes &amp; ideas</span>
+      </p>
+
+      <div class="writing__content">
+        <h2 class="writing__title" id="writing-title">Small notes on a changing web.</h2>
+        <p class="writing__intro">
+          I write about the tools, lessons, and questions that shape the way I build.
+        </p>
+
+        {writingNotes.length > 0 ? (
+          <ol class="writing__list">
+            {writingNotes.map((note, index) => (
+              <li class="writing-note">
+                <span class="writing-note__number">{String(index + 1).padStart(2, "0")}</span>
+                <div class="writing-note__content">
+                  <p class="writing-note__meta">
+                    <span>{note.category}</span>
+                    <time datetime={note.publishedAt}>{note.publishedAt}</time>
+                  </p>
+                  <h3 class="writing-note__title">
+                    {note.href ? <a href={note.href}>{note.title}</a> : note.title}
+                  </h3>
+                  <p class="writing-note__excerpt">{note.excerpt}</p>
+                </div>
+                {note.href && (
+                  <a class="writing-note__action" href={note.href} aria-label={`Read ${note.title}`}>
+                    <svg aria-hidden="true" viewBox="0 0 20 20" fill="none">
+                      <path d="M5.5 14.5 14.5 5.5M6 5.5h8.5V14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                  </a>
+                )}
+              </li>
+            ))}
+          </ol>
+        ) : (
+          <div class="writing__empty" role="status">
+            <span class="writing__empty-mark" aria-hidden="true">↳</span>
+            <p>New notes are in progress. I’ll share them here soon.</p>
+            <span class="writing__empty-status">Coming soon</span>
+          </div>
+        )}
+
+        <NewsletterForm />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .writing {
+    padding-block: clamp(5rem, 8vw, 7.5rem);
+    background: var(--color-bg);
+    color: var(--color-text);
+  }
+
+  .writing__layout {
+    display: grid;
+    grid-template-columns: 9.25rem minmax(0, 1fr);
+    column-gap: 2rem;
+    align-items: start;
+  }
+
+  .writing__eyebrow {
+    display: flex;
+    gap: 0.5rem;
+    margin: 0;
+    padding-top: 0.2rem;
+    color: var(--color-muted);
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    letter-spacing: 0.08em;
+    line-height: 1.5;
+    text-transform: uppercase;
+  }
+
+  .writing__eyebrow span:nth-child(2) {
+    color: var(--color-accent);
+  }
+
+  .writing__content {
+    max-width: 54rem;
+  }
+
+  .writing__title {
+    max-width: 16ch;
+    margin: 0;
+    font-size: clamp(2.5rem, 4.2vw, 3.5rem);
+    font-weight: 500;
+    letter-spacing: -0.07em;
+    line-height: 1.04;
+  }
+
+  .writing__intro {
+    max-width: 34rem;
+    margin-top: 1.5rem;
+    color: var(--color-muted);
+    font-size: 0.9375rem;
+    line-height: 1.8;
+  }
+
+  .writing__empty {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 3rem;
+    padding-block: 1rem;
+    border-block: 1px solid var(--color-border);
+    color: var(--color-muted);
+    font-size: 0.75rem;
+  }
+
+  .writing__empty-mark {
+    color: var(--color-accent);
+    font-family: var(--font-mono);
+  }
+
+  .writing__empty-status {
+    margin-left: auto;
+    color: var(--color-muted);
+    font-family: var(--font-mono);
+    font-size: 0.5625rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .writing__list {
+    margin: 3rem 0 0;
+    padding: 0;
+    border-top: 1px solid var(--color-border);
+    list-style: none;
+  }
+
+  .writing-note {
+    display: grid;
+    grid-template-columns: 2rem minmax(0, 1fr) 2.375rem;
+    gap: 1rem;
+    align-items: center;
+    padding-block: 1.5rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .writing-note__number,
+  .writing-note__meta {
+    color: var(--color-muted);
+    font-family: var(--font-mono);
+    font-size: 0.5625rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .writing-note__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin: 0;
+  }
+
+  .writing-note__title {
+    margin: 0.4rem 0 0;
+    font-size: 1.125rem;
+    font-weight: 650;
+    letter-spacing: -0.035em;
+  }
+
+  .writing-note__title a {
+    text-decoration: none;
+  }
+
+  .writing-note__title a:hover {
+    color: var(--color-accent);
+  }
+
+  .writing-note__excerpt {
+    margin-top: 0.4rem;
+    color: var(--color-muted);
+    font-size: 0.8125rem;
+    line-height: 1.65;
+  }
+
+  .writing-note__action {
+    display: inline-flex;
+    width: 2.375rem;
+    height: 2.375rem;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--color-border);
+    border-radius: 50%;
+    transition: background-color 180ms ease, color 180ms ease;
+  }
+
+  .writing-note__action svg {
+    width: 1.125rem;
+    height: 1.125rem;
+  }
+
+  .writing-note__action:hover {
+    background: var(--color-text);
+    color: var(--color-bg);
+  }
+
+  .writing-note__action:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 3px;
+  }
+
+  @media (max-width: 50rem) {
+    .writing__layout {
+      grid-template-columns: 1fr;
+      row-gap: 2.25rem;
+    }
+
+    .writing__content {
+      max-width: none;
+    }
+  }
+
+  @media (max-width: 35rem) {
+    .writing__empty {
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+
+    .writing__empty-status {
+      width: 100%;
+      margin-left: 1.35rem;
+    }
+
+    .writing-note {
+      grid-template-columns: 1.5rem minmax(0, 1fr) 2.375rem;
+      gap: 0.75rem;
+      align-items: start;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .writing-note__action {
+      transition: none;
+    }
+  }
+</style>
