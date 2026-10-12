@@ -47,3 +47,8 @@ export const socialLinks = [
   { label: 'TikTok', icon: 'tiktok', href: 'https://www.tiktok.com/@esteban_jrc1107' },
   { label: 'YouTube', icon: 'youtube', href: 'https://www.youtube.com/@estebanjrc1107' },
 ] as const;
+
+export const contact = {
+  email: 'estebanjrc1107@gmail.com',
+  subject: 'Let’s start a conversation',
+} as const;
