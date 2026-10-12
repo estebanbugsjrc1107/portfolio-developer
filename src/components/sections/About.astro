@@ -1,0 +1,280 @@
+---
+import SkillsCarousel from "./SkillsCarousel.astro";
+import { socialLinks } from "../../data/site";
+
+const experienceLink = socialLinks.find((link) => link.label === "LinkedIn");
+---
+
+<section class="about section" id="about" aria-labelledby="about-title">
+  <div class="container">
+    <div class="about__layout">
+      <p class="about__eyebrow">
+        <span>01</span>
+        <span aria-hidden="true">—</span>
+        <span>About</span>
+      </p>
+
+      <div class="about__content">
+        <h2 class="about__title" id="about-title">
+          Curious by nature. Precise<br class="about__desktop-break" /> by craft.
+        </h2>
+
+        <p class="about__description">
+          As a Systems Engineer, I bring a strong foundation in software
+          analysis, design, and development, along with systems infrastructure.
+          I focus on solving real problems and understanding user needs. I thrive
+          in collaborative environments, contributing to solutions that benefit
+          the organization.
+        </p>
+
+        <div class="about__actions">
+          <a
+            class="about__experience-link"
+            href={experienceLink?.href ?? "#about"}
+            target={experienceLink ? "_blank" : undefined}
+            rel={experienceLink ? "noreferrer" : undefined}
+          >
+            View my experience
+            <svg aria-hidden="true" viewBox="0 0 16 16" fill="none">
+              <path d="M5 3h8v8M13 3 6 10M11 9v4H3V5h4" stroke="currentColor" stroke-width="1.4" />
+            </svg>
+          </a>
+
+          <a
+            class="about__download-link"
+            href="/files/juan-esteban-romo-cv.docx"
+            download="Juan-Esteban-Romo-CV.docx"
+          >
+            <svg aria-hidden="true" viewBox="0 0 16 16" fill="none">
+              <path d="M8 2.5v7m0 0 2.5-2.5M8 9.5 5.5 7M3 10.5v2h10v-2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            Download CV
+          </a>
+        </div>
+
+        <ul class="about__facts" aria-label="Quick facts">
+          <li>Based in Colombia</li>
+          <li>Working across the web</li>
+          <li>Always learning something new</li>
+        </ul>
+      </div>
+
+      <div class="about__watermark" aria-hidden="true">
+        <span class="about__watermark-symbol">&lt;/&gt;</span>
+        <span>EST.</span>
+        <span>JRC</span>
+        <span>1107</span>
+      </div>
+    </div>
+
+    <SkillsCarousel />
+  </div>
+</section>
+
+<style>
+  .about {
+    padding-block: clamp(5rem, 8vw, 7.5rem);
+    background: var(--color-bg);
+    color: var(--color-text);
+  }
+
+  .about__layout {
+    display: grid;
+    grid-template-columns: 9.25rem minmax(0, 1fr) 3rem;
+    column-gap: 2rem;
+    align-items: start;
+  }
+
+  .about__eyebrow {
+    display: flex;
+    gap: 0.5rem;
+    margin: 0;
+    padding-top: 0.2rem;
+    color: var(--color-muted);
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    letter-spacing: 0.08em;
+    line-height: 1.5;
+    text-transform: uppercase;
+  }
+
+  .about__content {
+    min-width: 0;
+    max-width: 54rem;
+  }
+
+  .about__title {
+    max-width: 20ch;
+    margin: 0;
+    font-size: clamp(2.75rem, 4.1vw, 3.625rem);
+    font-weight: 500;
+    letter-spacing: -0.075em;
+    line-height: 1.02;
+  }
+
+  .about__description {
+    max-width: 33rem;
+    margin: 1.75rem 0 0;
+    color: var(--color-muted);
+    font-size: 0.9375rem;
+    line-height: 1.9;
+  }
+
+  .about__experience-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--color-border);
+    color: var(--color-text);
+    font-size: 0.6875rem;
+    font-weight: 800;
+    text-decoration: none;
+  }
+
+  .about__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .about__actions .about__experience-link {
+    margin-top: 0;
+  }
+
+  .about__download-link {
+    display: inline-flex;
+    min-height: 2.625rem;
+    align-items: center;
+    justify-content: center;
+    gap: 0.625rem;
+    padding: 0.625rem 1rem;
+    background: var(--color-accent);
+    color: #fff;
+    font-size: 0.6875rem;
+    font-weight: 800;
+    text-decoration: none;
+    transition: background-color 180ms ease, transform 180ms ease;
+  }
+
+  .about__download-link svg {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .about__download-link:hover {
+    transform: translateY(-2px);
+    background: #c95535;
+  }
+
+  .about__download-link:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 3px;
+  }
+
+  .about__experience-link svg {
+    width: 0.875rem;
+    height: 0.875rem;
+  }
+
+  .about__experience-link:hover {
+    color: var(--color-accent);
+  }
+
+  .about__experience-link:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 4px;
+  }
+
+  .about__facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.5rem;
+    margin: 3.5rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .about__facts li {
+    color: var(--color-muted);
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    letter-spacing: 0.025em;
+    line-height: 1.6;
+  }
+
+  .about__facts li::before {
+    margin-right: 0.4rem;
+    color: var(--color-accent);
+    content: "↳";
+  }
+
+  .about__watermark {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    padding-top: 0.25rem;
+    color: #aebbb0;
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    letter-spacing: 0.08em;
+    line-height: 1.4;
+    text-align: center;
+  }
+
+  .about__watermark-symbol {
+    margin-bottom: 0.85rem;
+    font-family: var(--font-body);
+    font-size: 1.25rem;
+    letter-spacing: -0.12em;
+  }
+
+  @media (max-width: 50rem) {
+    .about {
+      padding-block: 5rem;
+    }
+
+    .about__layout {
+      grid-template-columns: 1fr 2.5rem;
+      row-gap: 2.25rem;
+    }
+
+    .about__eyebrow {
+      grid-column: 1 / -1;
+    }
+
+    .about__content {
+      grid-column: 1;
+    }
+
+    .about__watermark {
+      grid-column: 2;
+      grid-row: 2;
+    }
+
+    .about__facts {
+      gap: 0.75rem 1rem;
+      margin-top: 2.5rem;
+    }
+  }
+
+  @media (max-width: 35rem) {
+    .about__title {
+      font-size: clamp(2.5rem, 11vw, 3.25rem);
+    }
+
+    .about__desktop-break {
+      display: none;
+    }
+
+    .about__facts {
+      flex-direction: column;
+      gap: 0.6rem;
+      padding-right: 0.5rem;
+    }
+  }
+</style>
