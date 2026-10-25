@@ -7,6 +7,9 @@
   --color-muted: #687069;
   --color-border: #cdd4ca;
   --color-accent: #e36d48;
+  --color-accent-text: #a94429;
+  --color-accent-button: #b4492d;
+  --color-accent-button-text: #ffffff;
   --color-focus: #2563eb;
 
   --font-body: 'Manrope', sans-serif;
@@ -35,6 +38,9 @@
   --color-muted: #aab2aa;
   --color-border: #3a403b;
   --color-accent: #e36d48;
+  --color-accent-text: #f08a68;
+  --color-accent-button: #b4492d;
+  --color-accent-button-text: #ffffff;
   --color-focus: #93b4ff;
 }
 
@@ -82,11 +88,16 @@ body {
 
 .site-brand__initial,
 .site-brand__domain {
-  color: var(--color-accent);
+  color: var(--color-accent-text);
 }
 
 .site-footer .site-brand {
   color: var(--color-footer-text, #f4f1ea);
+}
+
+.site-footer .site-brand__initial,
+.site-footer .site-brand__domain {
+  color: var(--color-accent);
 }
 
 h1,
@@ -131,6 +142,16 @@ button {
   transform: translateY(0);
 }
 
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
 @media (max-width: 50rem) {
   :root {
     --page-gutter: 1.375rem;
@@ -145,6 +166,15 @@ button {
   *,
   *::before,
   *::after {
-    transition-duration: 0.01ms !important;
+    transition: none !important;
+    animation: none !important;
+  }
+
+  .hero__button:hover,
+  .hero__portrait-frame:hover .hero__portrait,
+  .about__download-link:hover,
+  .site-footer__social-link:hover,
+  .contact__button:hover {
+    transform: none !important;
   }
 }

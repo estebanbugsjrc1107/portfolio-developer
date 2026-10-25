@@ -148,7 +148,7 @@ const copy = translations[locale].writing;
 
   .writing-note {
     display: grid;
-    grid-template-columns: 2rem minmax(0, 1fr) 2.375rem;
+    grid-template-columns: 2rem minmax(0, 1fr) 2.75rem;
     gap: 1rem;
     align-items: center;
     padding-block: 1.5rem;
@@ -179,11 +179,12 @@ const copy = translations[locale].writing;
   }
 
   .writing-note__title a {
-    text-decoration: none;
+    text-decoration-color: var(--color-border);
+    text-underline-offset: 0.2em;
   }
 
   .writing-note__title a:hover {
-    color: var(--color-accent);
+    color: var(--color-accent-text);
   }
 
   .writing-note__excerpt {
@@ -195,8 +196,8 @@ const copy = translations[locale].writing;
 
   .writing-note__action {
     display: inline-flex;
-    width: 2.375rem;
-    height: 2.375rem;
+    width: 2.75rem;
+    height: 2.75rem;
     align-items: center;
     justify-content: center;
     border: 1px solid var(--color-border);
@@ -242,7 +243,7 @@ const copy = translations[locale].writing;
     }
 
     .writing-note {
-      grid-template-columns: 1.5rem minmax(0, 1fr) 2.375rem;
+      grid-template-columns: 1.5rem minmax(0, 1fr) 2.75rem;
       gap: 0.75rem;
       align-items: start;
     }
