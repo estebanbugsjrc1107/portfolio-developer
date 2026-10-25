@@ -21,9 +21,9 @@ const copy = translations[getLocale(Astro.currentLocale)].about;
           {copy.titleFirst}<br class="about__desktop-break" /> {copy.titleSecond}
         </h2>
 
-        <p class="about__description">
-          {copy.description}
-        </p>
+        <div class="about__description">
+          {copy.description.map((paragraph) => <p>{paragraph}</p>)}
+        </div>
 
         <div class="about__actions">
           <a
@@ -59,7 +59,6 @@ const copy = translations[getLocale(Astro.currentLocale)].about;
         <span class="about__watermark-symbol">&lt;/&gt;</span>
         <span>EST.</span>
         <span>JRC</span>
-        <span>1107</span>
       </div>
     </div>
 
@@ -109,6 +108,8 @@ const copy = translations[getLocale(Astro.currentLocale)].about;
   }
 
   .about__description {
+    display: grid;
+    gap: 1rem;
     max-width: 33rem;
     margin: 1.75rem 0 0;
     color: var(--color-muted);

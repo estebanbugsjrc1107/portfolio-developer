@@ -7,7 +7,8 @@ interface Props {
 }
 
 const { locale: requestedLocale } = Astro.props;
-const copy = translations[getLocale(requestedLocale)].about;
+const locale = getLocale(requestedLocale);
+const copy = translations[locale].about;
 ---
 
 <div class="skills" aria-labelledby="skills-title">
@@ -25,7 +26,7 @@ const copy = translations[getLocale(requestedLocale)].about;
           {skillGroups.map((group, index) => (
             <div class="skills__group">
               <span class="skills__category">{copy.skillCategories[index]}</span>
-              {group.items.map((skill) => (
+              {group.items[locale].map((skill) => (
                 <span class="skills__item">{skill}</span>
               ))}
             </div>

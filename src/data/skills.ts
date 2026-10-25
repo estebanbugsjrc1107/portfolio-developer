@@ -1,22 +1,29 @@
 export const skillGroups = [
   {
-    category: 'Languages',
-    items: ['Java (SE/EE)', 'Kotlin', 'SQL'],
+    items: {
+      en: ['Native Spanish', 'English B1', 'Java (SE / EE)', 'Kotlin', 'SQL'],
+      es: ['Español nativo', 'Inglés B1', 'Java (SE / EE)', 'Kotlin', 'SQL'],
+    },
   },
   {
-    category: 'Frameworks',
-    items: ['Spring Boot', 'React', 'Angular', 'Flutter', 'Ionic', 'Tailwind CSS', 'Astro'],
+    items: { en: ['Angular', 'Astro', 'Tailwind CSS'], es: ['Angular', 'Astro', 'Tailwind CSS'] },
   },
   {
-    category: 'Databases',
-    items: ['Oracle', 'PostgreSQL', 'MongoDB'],
+    items: { en: ['Spring Framework', 'Node.js'], es: ['Spring Framework', 'Node.js'] },
   },
   {
-    category: 'Tools & Platforms',
-    items: ['Git', 'GitHub', 'GitLab', 'Docker', 'Figma', 'Power Platform', 'Oracle APEX'],
+    items: { en: ['Native Android'], es: ['Android nativo'] },
   },
   {
-    category: 'Currently Exploring',
-    items: ['DevOps', 'Cloud Computing', 'Artificial Intelligence'],
+    items: { en: ['Oracle Database', 'PostgreSQL', 'MongoDB'], es: ['Oracle Database', 'PostgreSQL', 'MongoDB'] },
+  },
+  {
+    items: { en: ['Git', 'Figma (UI/UX)', 'Docker'], es: ['Git', 'Figma (UI/UX)', 'Docker'] },
+  },
+  {
+    items: {
+      en: ['DevOps', 'Mobile development with Swift / Flutter'],
+      es: ['DevOps', 'Desarrollo móvil con Swift / Flutter'],
+    },
   },
 ] as const;
