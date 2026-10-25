@@ -4,7 +4,8 @@ import { socialLinks } from "../../data/site";
 import { getLocale, translations } from "../../i18n/translations";
 
 const experienceLink = socialLinks.find((link) => link.label === "LinkedIn");
-const copy = translations[getLocale(Astro.currentLocale)].about;
+const locale = getLocale(Astro.currentLocale);
+const copy = translations[locale].about;
 ---
 
 <section class="about section" id="about" aria-labelledby="about-title">
@@ -31,6 +32,7 @@ const copy = translations[getLocale(Astro.currentLocale)].about;
             href={experienceLink?.href ?? "#about"}
             target={experienceLink ? "_blank" : undefined}
             rel={experienceLink ? "noreferrer" : undefined}
+            aria-label={experienceLink ? `${copy.experience} (${translations[locale].opensNewTab})` : undefined}
           >
             {copy.experience}
             <svg aria-hidden="true" viewBox="0 0 16 16" fill="none">
@@ -119,6 +121,7 @@ const copy = translations[getLocale(Astro.currentLocale)].about;
 
   .about__experience-link {
     display: inline-flex;
+    min-height: 2.75rem;
     align-items: center;
     gap: 0.5rem;
     margin-top: 1.5rem;
@@ -144,12 +147,12 @@ const copy = translations[getLocale(Astro.currentLocale)].about;
 
   .about__download-link {
     display: inline-flex;
-    min-height: 2.625rem;
+    min-height: 2.75rem;
     align-items: center;
     justify-content: center;
     gap: 0.625rem;
     padding: 0.625rem 1rem;
-    background: var(--color-accent);
+    background: var(--color-accent-button);
     color: #fff;
     font-size: 0.6875rem;
     font-weight: 800;
@@ -164,7 +167,7 @@ const copy = translations[getLocale(Astro.currentLocale)].about;
 
   .about__download-link:hover {
     transform: translateY(-2px);
-    background: #c95535;
+    background: #a94429;
   }
 
   .about__download-link:focus-visible {
@@ -178,7 +181,7 @@ const copy = translations[getLocale(Astro.currentLocale)].about;
   }
 
   .about__experience-link:hover {
-    color: var(--color-accent);
+    color: var(--color-accent-text);
   }
 
   .about__experience-link:focus-visible {

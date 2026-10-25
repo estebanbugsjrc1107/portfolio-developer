@@ -97,7 +97,8 @@ const copy = translations[getLocale(requestedLocale)].newsletter;
   .newsletter__controls input {
     min-width: 0;
     flex: 1;
-    padding: 0.45rem 0;
+    min-height: 2.75rem;
+    padding: 0.45rem 0.25rem;
     border: 0;
     background: transparent;
     color: var(--color-text);
@@ -115,10 +116,11 @@ const copy = translations[getLocale(requestedLocale)].newsletter;
   }
 
   .newsletter__controls button {
+    min-height: 2.75rem;
     padding: 0.55rem 0.8rem;
     border: 0;
-    background: var(--color-accent);
-    color: #fff;
+    background: var(--color-accent-button);
+    color: var(--color-accent-button-text);
     font-size: 0.6875rem;
     font-weight: 800;
   }

@@ -84,6 +84,16 @@ const copy = translations[locale].about;
     outline-offset: 4px;
   }
 
+  .skills__viewport:focus-within {
+    overflow-x: auto;
+    mask-image: none;
+    scrollbar-width: thin;
+  }
+
+  .skills__viewport:focus-within .skills__track {
+    animation-play-state: paused;
+  }
+
   .skills__sequence {
     align-items: center;
     gap: 0.625rem;
@@ -98,7 +108,7 @@ const copy = translations[locale].about;
 
   .skills__category {
     margin-inline: 0.75rem 0.25rem;
-    color: var(--color-accent);
+    color: var(--color-accent-text);
     font-family: var(--font-mono);
     font-size: 0.5625rem;
     font-weight: 700;
