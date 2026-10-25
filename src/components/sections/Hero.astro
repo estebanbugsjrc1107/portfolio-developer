@@ -2,6 +2,9 @@
 import { Image } from "astro:assets";
 import portraitImage from "../../assets/portrait-dev.webp";
 import { hero } from "../../data/site";
+import { getLocale, translations } from "../../i18n/translations";
+
+const copy = translations[getLocale(Astro.currentLocale)].hero;
 ---
 
 <section class="hero" aria-labelledby="hero-title">
@@ -9,23 +12,23 @@ import { hero } from "../../data/site";
     <div class="hero__content">
       <p class="hero__eyebrow">
         <span class="hero__eyebrow-line" aria-hidden="true"></span>
-        {hero.eyebrow}
+        {copy.eyebrow}
       </p>
 
       <h1 class="hero__title" id="hero-title">
-        <span>{hero.title}</span>
-        <em>{hero.titleAccent}</em>
+        <span>{copy.title}</span>
+        <em>{copy.titleAccent}</em>
       </h1>
 
-      <p class="hero__description">{hero.description}</p>
+      <p class="hero__description">{copy.description}</p>
 
       <div class="hero__actions">
         <a class="hero__button" href={hero.primaryLink.href}>
-          {hero.primaryLink.label}
+          {copy.primaryLink}
           <span aria-hidden="true">↗</span>
         </a>
         <a class="hero__text-link" href={hero.secondaryLink.href}>
-          {hero.secondaryLink.label}
+          {copy.secondaryLink}
           <span aria-hidden="true">→</span>
         </a>
       </div>
@@ -36,7 +39,7 @@ import { hero } from "../../data/site";
         <Image
           class="hero__portrait"
           src={portraitImage}
-          alt={hero.portraitAlt}
+          alt={copy.portraitAlt}
           widths={[320, 480, 640, 800]}
           sizes="(max-width: 50rem) 76vw, 365px"
           format="webp"
@@ -50,7 +53,7 @@ import { hero } from "../../data/site";
 
       <p class="hero__note">
         <span aria-hidden="true">✳</span>
-        <span>Building with<br /><strong>care &amp; curiosity</strong></span>
+        <span>{copy.note}<br /><strong>{copy.noteAccent}</strong></span>
       </p>
       <div class="hero__orbit hero__orbit--primary" aria-hidden="true"></div>
       <div class="hero__orbit hero__orbit--secondary" aria-hidden="true"></div>
@@ -61,10 +64,10 @@ import { hero } from "../../data/site";
     <div class="container hero-availability__inner">
       <span class="hero-availability__status">
         <span class="hero-availability__dot" aria-hidden="true"></span>
-        {hero.availability}
+        {copy.availability}
       </span>
       <span class="hero-availability__rule" aria-hidden="true"></span>
-      <span class="hero-availability__location">{hero.location}</span>
+      <span class="hero-availability__location">{copy.location}</span>
     </div>
   </div>
 </section>

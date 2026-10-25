@@ -1,0 +1,20 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Hero from "../../components/sections/Hero.astro";
+import About from "../../components/sections/About.astro";
+import Projects from "../../components/sections/Projects.astro";
+import Writing from "../../components/sections/Writing.astro";
+import Contact from "../../components/sections/Contact.astro";
+import { site } from "../../data/site";
+import { translations } from "../../i18n/translations";
+
+const copy = translations.es;
+---
+
+<BaseLayout title={`${site.name} — Desarrollador de software`} description={copy.hero.description}>
+  <Hero />
+  <About />
+  <Projects />
+  <Writing />
+  <Contact />
+</BaseLayout>
