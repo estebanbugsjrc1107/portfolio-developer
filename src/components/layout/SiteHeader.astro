@@ -1,24 +1,49 @@
 ---
 import { navigation, site } from "../../data/site";
+import { getLocale, translations, type Locale } from "../../i18n/translations";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale: requestedLocale } = Astro.props;
+const locale = getLocale(requestedLocale);
+const copy = translations[locale];
 ---
 
 <header class="site-header">
   <div class="container site-header__inner">
-    <a class="site-brand" href="/" aria-label={`${site.name} home`}>
+    <a class="site-brand" href={`/${locale}/`} aria-label={`${site.name} ${copy.home}`}>
       <span class="site-brand__initial">{site.brand.initial}</span>{site.brand.name}<span class="site-brand__domain">{site.brand.domain}</span>
     </a>
 
-    <nav class="site-nav" aria-label="Main navigation">
-      {navigation.map((item) => (
-        <a class="site-nav__link" href={item.href}>{item.label}</a>
+    <nav class="site-nav" aria-label={copy.navigationLabel}>
+      {navigation.map((item, index) => (
+        <a class="site-nav__link" href={item.href}>{copy.navigation[index]}</a>
       ))}
+    </nav>
+
+    <nav class="language-switch" aria-label={locale === "en" ? "Language selection" : "Selección de idioma"}>
+      {locale === "en" ? (
+        <span class="language-switch__active" lang="en" aria-current="page">EN</span>
+      ) : (
+        <a class="language-switch__link" href="/en/" lang="en">EN</a>
+      )}
+      <span class="language-switch__separator" aria-hidden="true">/</span>
+      {locale === "es" ? (
+        <span class="language-switch__active" lang="es" aria-current="page">ES</span>
+      ) : (
+        <a class="language-switch__link" href="/es/" lang="es">ES</a>
+      )}
     </nav>
 
     <button
       class="theme-toggle"
       type="button"
       data-theme-toggle
-      aria-label="Switch to dark theme"
+      data-label-light={copy.theme.light}
+      data-label-dark={copy.theme.dark}
+      aria-label={copy.theme.dark}
     >
       <svg class="theme-toggle__moon" aria-hidden="true" viewBox="0 0 24 24" fill="none">
         <path d="M20.2 15.4A8.7 8.7 0 0 1 8.6 3.8 8.8 8.8 0 1 0 20.2 15.4Z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
@@ -38,7 +63,10 @@ import { navigation, site } from "../../data/site";
 
     const updateButtonLabel = () => {
       const isDark = document.documentElement.dataset.theme === "dark";
-      toggle?.setAttribute("aria-label", isDark ? "Switch to light theme" : "Switch to dark theme");
+      toggle?.setAttribute(
+        "aria-label",
+        isDark ? toggle.dataset.labelLight ?? "Switch to light theme" : toggle.dataset.labelDark ?? "Switch to dark theme",
+      );
     };
 
     updateButtonLabel();
@@ -91,6 +119,33 @@ import { navigation, site } from "../../data/site";
   }
 
   .site-nav__link:hover {
+    color: var(--color-text);
+  }
+
+  .language-switch {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    white-space: nowrap;
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+  }
+
+  .language-switch__active {
+    color: var(--color-text);
+  }
+
+  .language-switch__link,
+  .language-switch__separator {
+    color: var(--color-muted);
+  }
+
+  .language-switch__link {
+    text-decoration: none;
+    transition: color 180ms ease;
+  }
+
+  .language-switch__link:hover {
     color: var(--color-text);
   }
 
@@ -147,13 +202,20 @@ import { navigation, site } from "../../data/site";
 
     .site-nav {
       grid-column: 1 / -1;
+      grid-row: 2;
       margin-left: 0;
       gap: 1.125rem;
     }
 
+    .language-switch {
+      grid-column: 1;
+      grid-row: 3;
+      justify-self: start;
+    }
+
     .theme-toggle {
       grid-column: 2;
-      grid-row: 1;
+      grid-row: 3;
     }
   }
 

@@ -1,22 +1,30 @@
 ---
 import { skillGroups } from "../../data/skills";
+import { getLocale, translations, type Locale } from "../../i18n/translations";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale: requestedLocale } = Astro.props;
+const copy = translations[getLocale(requestedLocale)].about;
 ---
 
 <div class="skills" aria-labelledby="skills-title">
-  <h3 class="skills__title" id="skills-title">Skills &amp; Technologies</h3>
+  <h3 class="skills__title" id="skills-title">{copy.skillsTitle}</h3>
 
   <div
     class="skills__viewport"
     role="region"
-    aria-label="Technology skills carousel"
+    aria-label={copy.skillsCarousel}
     tabindex="0"
   >
     <div class="skills__track">
-      {[0, 1].map((copy) => (
-        <div class="skills__sequence" aria-hidden={copy === 1 ? "true" : undefined}>
-          {skillGroups.map((group) => (
+      {[0, 1].map((copyIndex) => (
+        <div class="skills__sequence" aria-hidden={copyIndex === 1 ? "true" : undefined}>
+          {skillGroups.map((group, index) => (
             <div class="skills__group">
-              <span class="skills__category">{group.category}</span>
+              <span class="skills__category">{copy.skillCategories[index]}</span>
               {group.items.map((skill) => (
                 <span class="skills__item">{skill}</span>
               ))}

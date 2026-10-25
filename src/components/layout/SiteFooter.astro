@@ -1,24 +1,33 @@
 ---
 import { site, socialLinks } from "../../data/site";
+import { getLocale, translations, type Locale } from "../../i18n/translations";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale: requestedLocale } = Astro.props;
+const locale = getLocale(requestedLocale);
+const copy = translations[locale];
 ---
 
 <footer class="site-footer">
   <div class="container site-footer__inner">
     <div class="site-footer__brand-block">
-      <a class="site-brand site-footer__brand" href="/" aria-label={`${site.name} home`}>
+      <a class="site-brand site-footer__brand" href={`/${locale}/`} aria-label={`${site.name} ${copy.home}`}>
         <span class="site-brand__initial">{site.brand.initial}</span>{site.brand.name}<span class="site-brand__domain">{site.brand.domain}</span>
       </a>
-      <small class="site-footer__credit">{site.watermark}</small>
+      <small class="site-footer__credit">{copy.watermark}</small>
     </div>
 
-    <nav class="site-footer__socials" aria-label="Social media">
+    <nav class="site-footer__socials" aria-label={copy.socialMedia}>
       {socialLinks.map((item) => (
         <a
           class="site-footer__social-link"
           href={item.href}
           target="_blank"
           rel="noreferrer"
-          aria-label={`${item.label} (opens in a new tab)`}
+          aria-label={`${item.label} (${copy.opensNewTab})`}
         >
           {item.icon === 'github' && (
             <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -57,7 +66,7 @@ import { site, socialLinks } from "../../data/site";
     </nav>
 
     <a class="site-footer__back-to-top" href="#top">
-      <span>Back to top</span>
+      <span>{copy.backToTop}</span>
       <span class="site-footer__top-icon" aria-hidden="true">⌃</span>
     </a>
   </div>
